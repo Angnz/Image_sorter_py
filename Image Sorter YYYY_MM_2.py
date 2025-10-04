@@ -83,7 +83,7 @@ def obtener_fecha_real(ruta_archivo, es_imagen=True):
         return fecha_modificacion  # respaldo extremo
 
 # -----------------------
-# Funciones de conteo y listado
+# Funciones de conteo y funciones de listado
 # -----------------------
 
 def contar_archivos(ruta, extensiones):
@@ -106,7 +106,7 @@ def listar_archivos(ruta, extensiones, ruta_sorted):
     return archivos_lista
 
 # -----------------------
-# Función principal de orden
+# Función principal de ordenadr archivos multimedia
 # -----------------------
 
 def ordenar_archivos_por_fecha(ruta_origen):
@@ -135,11 +135,11 @@ def ordenar_archivos_por_fecha(ruta_origen):
     return todas_extensiones, ruta_sorted
 
 # -----------------------
-# MAIN
+# HAUPTMENÜ
 # -----------------------
 
 if __name__ == "__main__":
-    ruta = r"E:\HDD1 Backup\Doks back uo\01_Petita Ideas"  # 🔧 Cambia por tu carpeta
+    ruta = r"E:\HDD1 Backup\Doks back uo\01_Petita Ideas"  # Cambia por tu carpeta
 
     extensiones_imagen = {'.jpg', '.jpeg', '.png', '.heic', '.heif', '.tif', '.tiff', '.bmp', '.gif', '.webp'}
     extensiones_video = {'.mp4', '.mov', '.avi', '.mkv', '.wmv', '.flv', '.mpeg', '.mpg'}
@@ -149,6 +149,7 @@ if __name__ == "__main__":
     _, ruta_sorted = ordenar_archivos_por_fecha(ruta)
     total_sorted = contar_archivos(ruta_sorted, todas_extensiones)
 
-    print("\n✅ ¡Proceso completado!")
-    print(f"📂 Total archivos en carpeta original: {total_origen}")
-    print(f"📂 Total archivos en carpeta 'sorted': {total_sorted}")
+    print("\n¡Proceso completado!")
+    print(f"Total archivos en carpeta original: {total_origen}")
+    print(f"Total archivos en carpeta 'sorted': {total_sorted}")
+
