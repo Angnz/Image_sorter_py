@@ -2,7 +2,7 @@ import os
 from PIL import Image
 
 # =============================
-# CONFIGURACIÓN - EDITA AQUÍ 👇
+# CONFIGURACIÓN - EDITA AQUÍ 
 # =============================
 INPUT_FOLDER = "C:\\Users\\Ángel\\Pictures\\00_Mano Ievute\\Vinted_2\\IEVITA\\Neuer Ordner"      # Carpeta donde están las imágenes
 SIZE_LIMIT_MB = 9          # Límite en MB
@@ -21,7 +21,7 @@ def resize_images_bulk(input_folder, size_limit_mb=2, reduce_percent=25):
         # Revisar tamaño del archivo
         file_size_mb = os.path.getsize(input_path) / (1024 * 1024)
         if file_size_mb <= size_limit_mb:
-            print(f"❌ {filename} ({file_size_mb:.2f} MB) → No necesita reducción.")
+            print(f" {filename} ({file_size_mb:.2f} MB) → No necesita reducción.")
             continue
 
         # Crear nuevo nombre con sufijo _resized
@@ -39,8 +39,9 @@ def resize_images_bulk(input_folder, size_limit_mb=2, reduce_percent=25):
             # Guardar en la misma carpeta con nuevo nombre
             resized_img.save(output_path, optimize=True, quality=85)
 
-        print(f"✅ {filename} ({file_size_mb:.2f} MB) → Guardada como {output_filename}")
+        print(f"{filename} ({file_size_mb:.2f} MB) → Guardada como {output_filename}")
 
 if __name__ == "__main__":
     resize_images_bulk(INPUT_FOLDER, SIZE_LIMIT_MB, REDUCE_PERCENT)
     print("🎉 Proceso completado.")
+
