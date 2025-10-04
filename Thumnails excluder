@@ -49,10 +49,11 @@ def mover_thumbnails(ruta_base):
                                 i += 1
                         shutil.move(ruta_archivo, destino)
                         total_movidos += 1
-                        print(f"🟢 Movido: {ruta_archivo} → {destino}")
+                        print(f" Movido: {ruta_archivo} → {destino}")
 
-    print("\n✅ Proceso completado")
-    print(f"📂 Total de imágenes movidas: {total_movidos}")
+    print("\n Proceso completado")
+    print(f" Total de imágenes movidas: {total_movidos}")
 
 if __name__ == "__main__":
     mover_thumbnails(ruta_base)
+
