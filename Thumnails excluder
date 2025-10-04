@@ -1,0 +1,58 @@
+import os
+import shutil
+
+# Configuración
+ruta_base = r"E:\HDD1 Backup\Doks back uo\01_Petita Ideas\sorted"   # 🔧 Cambia a la carpeta base (la que contiene los años)
+umbral_bytes = 20 * 1024               # 20 KB en bytes
+extensiones_imagen = {
+    '.jpg', '.jpeg', '.png', '.heic', '.heif',
+    '.tif', '.tiff', '.bmp', '.gif', '.webp'
+}
+
+def mover_thumbnails(ruta_base):
+    total_movidos = 0
+    for carpeta_ano in os.listdir(ruta_base):
+        ruta_ano = os.path.join(ruta_base, carpeta_ano)
+        if not os.path.isdir(ruta_ano):
+            continue  # Saltar archivos que no sean carpetas
+
+        # Buscar carpetas de mes
+        for carpeta_mes in os.listdir(ruta_ano):
+            ruta_mes = os.path.join(ruta_ano, carpeta_mes)
+            if not os.path.isdir(ruta_mes):
+                continue
+
+            # Crear carpeta thumbnails dentro de la carpeta de mes
+            carpeta_thumbs = os.path.join(ruta_mes, "thumbnails")
+            os.makedirs(carpeta_thumbs, exist_ok=True)
+
+            # Recorrer archivos y mover los que sean imágenes < 20 KB
+            for archivo in os.listdir(ruta_mes):
+                ruta_archivo = os.path.join(ruta_mes, archivo)
+                if not os.path.isfile(ruta_archivo):
+                    continue
+
+                ext = os.path.splitext(archivo)[1].lower()
+                if ext in extensiones_imagen:
+                    size = os.path.getsize(ruta_archivo)
+                    if size < umbral_bytes:
+                        destino = os.path.join(carpeta_thumbs, archivo)
+                        # Evitar sobrescritura si ya existe
+                        if os.path.exists(destino):
+                            base, ext2 = os.path.splitext(archivo)
+                            i = 1
+                            while True:
+                                nuevo_nombre = f"{base}_{i}{ext2}"
+                                destino = os.path.join(carpeta_thumbs, nuevo_nombre)
+                                if not os.path.exists(destino):
+                                    break
+                                i += 1
+                        shutil.move(ruta_archivo, destino)
+                        total_movidos += 1
+                        print(f"🟢 Movido: {ruta_archivo} → {destino}")
+
+    print("\n✅ Proceso completado")
+    print(f"📂 Total de imágenes movidas: {total_movidos}")
+
+if __name__ == "__main__":
+    mover_thumbnails(ruta_base)
