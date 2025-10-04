@@ -53,7 +53,7 @@ def generar_csv_merge(archivos_copiados, destino_merged):
         writer.writerow(["Archivo original", "Ruta final en merged"])
         for original, destino in archivos_copiados:
             writer.writerow([original, destino])
-    print(f"\n📄 CSV generado: {ruta_csv}")
+    print(f"\n CSV generado: {ruta_csv}")
 
 # -----------------------
 # Función principal de merge
@@ -71,7 +71,7 @@ def fusionar(source, original):
     destino_merged = os.path.join(base_dir, nombre_merged)
     os.makedirs(destino_merged, exist_ok=True)
 
-    print(f"📂 Copiando contenido base de '{original}' a '{destino_merged}' ...")
+    print(f"Copiando contenido base de '{original}' a '{destino_merged}' ...")
     copiar_estructura(original, destino_merged)
 
     print(f"🔍 Calculando hashes existentes en '{destino_merged}' ...")
@@ -83,7 +83,7 @@ def fusionar(source, original):
                 h = calcular_hash(ruta)
                 hashes_existentes[h] = ruta
             except Exception as e:
-                print(f"⚠️ Error leyendo {ruta}: {e}")
+                print(f"Error leyendo {ruta}: {e}")
 
     print(f"📥 Mergeando archivos de '{source}' ...")
     nuevos = 0
@@ -109,15 +109,15 @@ def fusionar(source, original):
                 else:
                     duplicados += 1
             except Exception as e:
-                print(f"⚠️ Error procesando {ruta_origen}: {e}")
+                print(f"Error procesando {ruta_origen}: {e}")
 
     # Generar CSV de archivos copiados
     generar_csv_merge(archivos_copiados, destino_merged)
 
-    print("\n✅ ¡Proceso completado!")
-    print(f"📂 Archivos nuevos copiados: {nuevos}")
-    print(f"📂 Archivos duplicados ignorados: {duplicados}")
-    print(f"📂 Carpeta final de prueba: {destino_merged}")
+    print("\n ¡Proceso completado!")
+    print(f" Archivos nuevos copiados: {nuevos}")
+    print(f" Archivos duplicados ignorados: {duplicados}")
+    print(f" Carpeta final de prueba: {destino_merged}")
 
 # -----------------------
 # MAIN
@@ -129,3 +129,4 @@ if __name__ == "__main__":
     original_path = r"C:\Users\Ángel\Pictures\2024"      # Carpeta original (no se modifica, definitivas)
 
     fusionar(source_path, original_path)
+
