@@ -1,0 +1,97 @@
+from PIL import Image, ExifTags
+from pillow_heif import register_heif_opener
+from pathlib import Path
+import subprocess
+
+# Registrar soporte HEIC en Pillow
+register_heif_opener()
+
+# Ruta completa al exe de ExifTool
+ruta_exiftool = r"C:\Users\Pavlina\Downloads\exiftool-13.48_64\exiftool-13.48_64\exiftool.exe"
+
+def convertir_heic_a_jpg(directorio_origen="E:\\Bilder\\2019\\2019_11\\HEIC"):
+    """
+    Convierte todas las imágenes HEIC del directorio a JPG,
+    preservando los metadatos EXIF con ExifTool y corrigiendo orientación.
+    """
+    directorio_origen = Path(directorio_origen)
+    carpeta_jpg = directorio_origen / "JPG"
+    carpeta_jpg.mkdir(exist_ok=True)
+
+    # Buscar archivos HEIC
+    archivos_heic = [
+        f for f in directorio_origen.iterdir()
+        if f.is_file() and f.suffix.lower() == ".heic"
+    ]
+
+    if not archivos_heic:
+        print("No se encontraron archivos HEIC en el directorio")
+        return
+
+    print(f"Se encontraron {len(archivos_heic)} archivos HEIC")
+
+    convertidos = 0
+
+    # Clave EXIF de orientación
+    for tag, value in ExifTags.TAGS.items():
+        if value == "Orientation":
+            orient_tag = tag
+            break
+
+    for archivo_heic in archivos_heic:
+        try:
+            # Abrir imagen HEIC y obtener EXIF básico
+            imagen = Image.open(archivo_heic)
+            exif = imagen.info.get("exif")
+
+            # Corregir orientación según EXIF
+            try:
+                exif_dict = imagen._getexif()
+                if exif_dict is not None:
+                    orient = exif_dict.get(orient_tag)
+                    if orient == 3:
+                        imagen = imagen.rotate(180, expand=True)
+                    elif orient == 6:
+                        imagen = imagen.rotate(270, expand=True)
+                    elif orient == 8:
+                        imagen = imagen.rotate(90, expand=True)
+            except Exception:
+                # Si falla la lectura de orientación, seguimos igual
+                pass
+
+            # Convertir a RGB
+            imagen_rgb = imagen.convert("RGB")
+
+            # Crear nombre y ruta JPG
+            nombre_jpg = archivo_heic.stem + ".jpg"
+            ruta_jpg = carpeta_jpg / nombre_jpg
+
+            # Guardar JPG con EXIF básico
+            if exif:
+                imagen_rgb.save(ruta_jpg, "JPEG", quality=100, exif=exif)
+            else:
+                imagen_rgb.save(ruta_jpg, "JPEG", quality=100)
+
+            # Copiar todos los metadatos con ExifTool
+            try:
+                subprocess.run([
+                    ruta_exiftool,
+                    "-TagsFromFile", str(archivo_heic),
+                    "-overwrite_original",
+                    str(ruta_jpg)
+                ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except FileNotFoundError:
+                print("⚠ ExifTool no encontrado, metadatos completos no copiados")
+
+            convertidos += 1
+            print(f"✓ Convertido: {archivo_heic.name} → {nombre_jpg} | {convertidos}/{len(archivos_heic)}")
+
+        except Exception as e:
+            print(f"✗ Error al convertir {archivo_heic.name}: {str(e)}")
+
+    print(f"\n{convertidos} de {len(archivos_heic)} archivos convertidos exitosamente")
+    print(f"Archivos guardados en: {carpeta_jpg}")
+
+
+if __name__ == "__main__":
+    convertir_heic_a_jpg()
