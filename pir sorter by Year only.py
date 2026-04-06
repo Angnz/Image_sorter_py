@@ -7,9 +7,10 @@ import re
 
 # -----------------------
 # CONFIG
+# max path es el margen de longitud max de wind para los links. 
 # -----------------------
 
-MAX_PATH = 240  # margen seguro para Windows
+MAX_PATH = 260  # margen seguro para Windows
 
 
 # -----------------------
