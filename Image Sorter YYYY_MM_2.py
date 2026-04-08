@@ -139,7 +139,7 @@ def ordenar_archivos_por_fecha(ruta_origen):
 # -----------------------
 
 if __name__ == "__main__":
-    ruta = r"E:\HDD1 Backup\Doks back uo\01_Petita Ideas"  # Cambia por tu carpeta
+    ruta = r"E:\Bilder\00_Sort"  # Cambia por tu carpeta
 
     extensiones_imagen = {'.jpg', '.jpeg', '.png', '.heic', '.heif', '.tif', '.tiff', '.bmp', '.gif', '.webp'}
     extensiones_video = {'.mp4', '.mov', '.avi', '.mkv', '.wmv', '.flv', '.mpeg', '.mpg'}

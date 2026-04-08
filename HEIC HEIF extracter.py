@@ -45,7 +45,7 @@ def extraer_heic(ruta_origen):
 
                 ruta_destino = obtener_ruta_sin_conflicto(ruta_destino)
 
-                shutil.copy2(ruta_original, ruta_destino)
+                shutil.move(ruta_original, ruta_destino)
 
                 total += 1
                 print(f"{total} Copiado: {ruta_original} → {ruta_destino}")
@@ -59,7 +59,7 @@ def extraer_heic(ruta_origen):
 # -----------------------
 
 if __name__ == "__main__":
-    ruta = r"C:\Users\Ángel\Desktop\PIC Pauline\Orginal"  # 👈 Aqui va la ruta
+    ruta = r"C:\Users\Ángel\Desktop\Pavlina"  # 👈 Aqui va la ruta
 
     if not os.path.exists(ruta):
         print("❌ La ruta no existe")
