@@ -16,7 +16,7 @@ REPORTE = r"E:\Bilder\Whatsapp_backup\backup_whatsapp_reporte_{mes_ano}.txt"
 os.makedirs(DESTINO, exist_ok=True)
 
 
-# ── COPIA RECURSIVA (sin sobreescribir ni borrar) ──────────────────────────────
+# ── COPIA RECURSIVA (sin sobreescribir ni borrar) ──────────────────────────────-
 copiados    = []
 omitidos    = []
 errores     = []
