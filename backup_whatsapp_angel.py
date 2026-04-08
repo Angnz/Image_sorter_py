@@ -9,7 +9,7 @@ FUENTES = [
     r"C:\Users\Ángel\Pictures\Whatsapp_S9\Fotos",
 ]
 DESTINO = r"E:\Bilder\Whatsapp_backup"
-REPORTE = r"E:\Bilder\Whatsapp_backup\backup_whatsapp_reporte.txt"
+REPORTE = r"E:\Bilder\Whatsapp_backup\backup_whatsapp_reporte_{mes_ano}.txt"
 
 
 # ── CREAR DESTINO SI NO EXISTE ─────────────────────────────────────────────────
@@ -23,6 +23,10 @@ errores     = []
 inicio      = datetime.now()
 fecha_hoy   = inicio.strftime("%d/%m/%Y")
 hora_inicio = inicio.strftime("%H:%M:%S")
+mes_ano     = inicio.strftime("%Y_%m")
+
+#crear reporte y save path con variable definida
+REPORTE = rf"E:\Bilder\Whatsapp_backup\backup_whatsapp_reporte_{mes_ano}.txt"
 
 
 for carpeta_origen in FUENTES:
