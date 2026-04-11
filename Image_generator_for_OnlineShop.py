@@ -97,27 +97,31 @@ def process_cr3_directory(directory_path):
                 img.save(ig_jpg_path, 'JPEG', quality=70, optimize=True)
                 
             # 4. Crear el archivo TXT de información
-            txt_content = f"""-----------------------------------------------------
-What’s included in your download:
-1 x CR3 File (RAW): Original uncompressed file [{cr3_size_mb:.1f} MB] for professional editing and maximum flexibility.
-1 x High-Res JPG: Full-size image [{width} x {height} px] ready for large-format printing or personal use.
-1 x JPG_Instagram: File Size Optimized perfectly for your social media feed.
-
+            txt_content = f"""
+<b>What’s included in your download:</b>
+<ul>
+    <li>1 x CR3 File (RAW): Original uncompressed file [{cr3_size_mb:.1f} MB] for professional editing and maximum flexibility.</li>
+    <li>1 x High-Res JPG: Full-size image [{width} x {height} px] ready for large-format printing or personal use.</li>
+    <li>1 x JPG_Instagram: File Size Optimized perfectly for your social media feed.</li>
+</ul>
+<br>
 Author: Spotedfy
-
-CR3 File Details:
-RAW (.CR3)
-Type: CR3 File
-Size: {cr3_size_mb:.1f} MB
-Date taken: {exif['date_taken']}
-Dimensions: {width} x {height}
-Camera maker: {exif['camera_maker']}
-Camera model: {exif['camera_model']}
-ISO speed: {exif['iso']}
-F-stop: {exif['f_stop']}
-Exposure time: {exif['exposure']}
-Focal length: {exif['focal_length']}
------------------------------------------------------"""
+<br><br>
+<b>CR3 File Details:</b>
+<ul>
+    <li>RAW (.CR3)</li>
+    <li>Type: CR3 File</li>
+    <li>Size: {cr3_size_mb:.1f} MB</li>
+    <li>Date taken: {exif['date_taken']}</li>
+    <li>Dimensions: {width} x {height}</li>
+    <li>Camera maker: {exif['camera_maker']}</li>
+    <li>Camera model: {exif['camera_model']}</li>
+    <li>ISO speed: {exif['iso']}</li>
+    <li>Fstop: {exif['f_stop']}</li>
+    <li>Exposure time: {exif['exposure']}</li>
+    <li>Focal length: {exif['focal_length']}</li>
+</ul>
+"""
             
             with open(txt_path, 'w', encoding='utf-8') as txt_file:
                 txt_file.write(txt_content)
