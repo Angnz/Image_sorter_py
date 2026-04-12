@@ -101,7 +101,7 @@ def process_cr3_directory(directory_path):
 What’s included in your download:
 1 x CR3 File (RAW): Original uncompressed file [{cr3_size_mb:.1f} MB] for professional editing and maximum flexibility.
 1 x High-Res JPG: Full-size image [{width} x {height} px] ready for large-format printing or personal use.
-1 x JPG_Instagram: File Size Optimized perfectly for your social media feed.
+1 x JPG_Instagram: JPG File Size Optimized for your social media feed.
 
 Author: Spotedfy
 
