@@ -4,8 +4,8 @@ from datetime import datetime
 
 # ── RUTAS ──────────────────────────────────────────────────────────────────────
 FUENTES = [
-    r"C:\Users\Ángel\Pictures\Whatsapp_S9\Videos",
-    r"C:\Users\Ángel\Pictures\Whatsapp_S9\Fotos",
+    r"C:\Users\Angel\Pictures\Whatsapp_S9\Videos",
+    r"C:\Users\Angel\Pictures\Whatsapp_S9\Fotos",
 ]
 DESTINO = r"E:\Bilder\Whatsapp_backup"
 
